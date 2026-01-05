@@ -1,3 +1,19 @@
-<p>
-  tarjeta-cita works!
-</p>
+<!--tarjeta  para mostrar una cita famosa con el nombre del autor-->
+<ion-card *ngIf="cita">
+  <!--encabezado de la tarjeta-->
+  <ion-card-header>
+    <ion-card-title>Cita Famosa </ion-card-title>
+  </ion-card-header>
+
+  <!--contenido de la tarjeta-->
+  <ion-card-content>
+    <p class = "ion-text-center">"{{ cita.frase }}"</p>
+    <p class = "ion-text-end ion-padding-top"><strong>- {{ cita.autor }}</strong></p>
+  </ion-card-content>
+</ion-card>
+<!--si no hay cita, mostrar un mensaje-->
+<ion-card *ngIf="!cita">
+  <ion-card-content class="ion-text-center">
+    <p>No hay citas disponibles</p>
+  </ion-card-content>
+</ion-card>
