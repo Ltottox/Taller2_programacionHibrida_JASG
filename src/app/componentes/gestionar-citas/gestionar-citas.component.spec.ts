@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { FormularioCitaComponent } from './formulario-cita.component';
+import { GestionarCitasComponent } from './gestionar-citas.component';
 
-describe('FormularioCitaComponent', () => {
-  let component: FormularioCitaComponent;
-  let fixture: ComponentFixture<FormularioCitaComponent>;
+describe('GestionarCitasComponent', () => {
+  let component: GestionarCitasComponent;
+  let fixture: ComponentFixture<GestionarCitasComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [FormularioCitaComponent],
+      imports: [GestionarCitasComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FormularioCitaComponent);
+    fixture = TestBed.createComponent(GestionarCitasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
