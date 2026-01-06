@@ -1,13 +1,25 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>configuraciones</ion-title>
+    <ion-title>Configuraciones</ion-title>
+    <ion-buttons slot="start">
+
+      <!-- Botón volver a la página anterior -->
+      <ion-back-button defaultHref="/cita"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">configuraciones</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        ¿Permitir borrar citas desde la página inicial?
+      </ion-label>
+      
+      <ion-toggle 
+        [(ngModel)]="configuracion.permitirBorrarDesdeInicio"
+        (ngModelChange)="onConfigChange()">
+      </ion-toggle>
+    </ion-item>
+  </ion-list>
 </ion-content>

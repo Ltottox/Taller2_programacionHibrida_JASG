@@ -3,8 +3,8 @@
   <ion-toolbar>
     <ion-title>Citas Famosas</ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/gestionar">
-        <ion-icon name="list"></ion-icon>
+      <ion-button routerLink="/configuraciones">
+        <ion-icon name="setting-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -25,6 +25,16 @@
     class="ion-margin-top">
     <ion-icon name="refresh" slot="start"></ion-icon>
     Nueva Cita Aleatoria
+  </ion-button>
+
+    <ion-button 
+    *ngIf="permitirBorrarDesdeInicio" 
+    expand="full" 
+    color="danger"
+    class="ion-margin-top"
+    (click)="borrarCitaActual()">
+    <ion-icon name="trash" slot="start"></ion-icon>
+    Eliminar Cita Actual
   </ion-button>
 
 </ion-content>
