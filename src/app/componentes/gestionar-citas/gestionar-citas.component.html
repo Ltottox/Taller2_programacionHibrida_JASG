@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/cita"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gestionar Citas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <!-- 
+    COMPONENTE HIJO 1: Formulario (con validaciones)
+    Emite el evento (citaAgregada) cuando el usuario agrega
+  -->
+  <app-formulario-cita (citaAgregada)="onCitaAgregada($event)"></app-formulario-cita>
+
+  <!-- Lista de citas -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Citas Guardadas</ion-card-title>
+    </ion-card-header>
+    
+    <ion-list>
+      <ion-item-sliding *ngFor="let cita of citas">
+        
+        <!-- Componente HIJO 2: Tarjeta -->
+        <ion-item>
+          <app-tarjeta-cita [cita]="cita"></app-tarjeta-cita>
+        </ion-item>
+
+
+
+      </ion-item-sliding>
+    </ion-list>
+  </ion-card>
+
+</ion-content>

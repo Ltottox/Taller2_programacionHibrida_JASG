@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 import { ConfiguracionService } from '../../servicios/configuracion.service';
 import { Configuracion } from '../../modelos/configuracion.model';
 
@@ -12,7 +13,7 @@ import { Configuracion } from '../../modelos/configuracion.model';
   templateUrl: './configuraciones.page.html',
   styleUrls: ['./configuraciones.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule]
+  imports: [CommonModule, FormsModule, IonicModule, RouterModule],
 })
 export class ConfiguracionesPage implements OnInit {
   // Objeto con la configuración actual

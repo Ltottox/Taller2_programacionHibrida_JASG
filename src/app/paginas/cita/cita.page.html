@@ -4,7 +4,7 @@
     <ion-title>Citas Famosas</ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/configuraciones">
-        <ion-icon name="setting-outline"></ion-icon>
+        <ion-icon name="settings-outline" class="icon-setings" ></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -35,6 +35,15 @@
     (click)="borrarCitaActual()">
     <ion-icon name="trash" slot="start"></ion-icon>
     Eliminar Cita Actual
+  </ion-button>
+
+  <ion-button 
+    expand="block" 
+    routerLink="/gestion-de-citas" 
+    color="secondary"
+    class="ion-margin-top">
+    <ion-icon name="list-outline" slot="start"></ion-icon>
+    Gestionar Citas
   </ion-button>
 
 </ion-content>

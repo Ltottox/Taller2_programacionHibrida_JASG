@@ -1,0 +1,56 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Crea una nueva cita</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <form (ngSubmit)="onSubmit()" #formCita="ngForm">
+    <!-- Campo de texto para la frase de la cita, con validaciones obligatorias -->
+      <ion-item>
+        <ion-label position="floating">Frase</ion-label>
+        <ion-textarea 
+          required
+          minlength="5"
+          maxlength="500" 
+          name="frase"
+          [(ngModel)]="frase"
+          #fraseInput="ngModel">
+        </ion-textarea>
+      </ion-item>
+      <!-- Notas de error para la frase ocupo ion-note para que usuario visualice los errores en tiempo real -->
+      <ion-note color="danger" *ngIf="fraseInput.invalid && (fraseInput.dirty || fraseInput.touched)"> 
+        <small *ngIf="fraseInput.errors?.['required']">La frase es obligatoria.</small>
+        <small *ngIf="fraseInput.errors?.['minlength']">La frase debe tener al menos 5 caracteres.</small>
+        <small *ngIf="fraseInput.errors?.['maxlength']">La frase no puede exceder los 500 caracteres.</small>
+      </ion-note>
+      <!-- Campo de texto para el autor de la cita, con validaciones obligatorias -->
+      <ion-item>
+        <ion-label position="floating">Autor</ion-label>
+        <ion-input 
+          required
+          minlength="2"
+          maxlength="100"
+          name="autor"
+          [(ngModel)]="autor"
+          #autorInput="ngModel">
+        </ion-input>
+      </ion-item>
+      <!-- Notas de error para el autor -->
+      <ion-note color="danger" *ngIf="autorInput.invalid && (autorInput.dirty || autorInput.touched)">
+        <small *ngIf="autorInput.errors?.['required']">El autor es obligatorio.</small>
+        <small *ngIf="autorInput.errors?.['minlength']">El autor debe tener al menos 2 caracteres.</small>
+        <small *ngIf="autorInput.errors?.['maxlength']">El autor no puede exceder los 100 caracteres.</small>
+      </ion-note>
+      <!-- Botón para enviar el formulario, deshabilitado si el formulario es inválido -->
+      <ion-button 
+        type="submit" 
+        expand="block" 
+        color="primary" 
+        [disabled]="formCita.invalid"
+        class="ion-margin-top">
+        Agregar Cita
+      </ion-button>
+
+    </form>
+  </ion-card-content>
+</ion-card>

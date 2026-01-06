@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';// Importar el componente de la tarjeta de cita de una sola vez
 import { TarjetaCitaComponent } from '../../componentes/tarjeta-cita/tarjeta-cita.component';
 import { Cita } from '../../modelos/cita.model';
 import { CitaService } from '../../servicios/cita.service';
 import { addIcons } from 'ionicons';
-import { refresh, trash } from 'ionicons/icons';
+import { settingsOutline } from  'ionicons/icons';// Importar el icono de configuración
+import { refresh, trash } from 'ionicons/icons';// Importar los iconos necesarios
 import { ConfiguracionService } from '../../servicios/configuracion.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cita',
   templateUrl: './cita.page.html',
   styleUrls: ['./cita.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, TarjetaCitaComponent]
+  imports: [CommonModule, IonicModule, TarjetaCitaComponent, RouterModule],
 })
 export class CitaPage implements OnInit {
   citaActual: Cita | null = null;
@@ -22,17 +24,20 @@ export class CitaPage implements OnInit {
   constructor(
       private citaService: CitaService,
       private configuracionService: ConfiguracionService) {
-    addIcons({ refresh,trash });
+    addIcons({ settingsOutline, refresh, trash });
   }
 
-  async ngOnInit() {
-    console.log('Página de inicio cargada');
-    
-    //Cargar la configuración guardada desde el servicio
-    this.permitirBorrarDesdeInicio = await this.configuracionService.getPermitirBorrarDesdeInicio();
-    
+ ngOnInit() {
+    console.log('Página CITA creada por primera vez');
     this.cargarCitaAleatoria();
   }
+// recargar la configuracion al iniciar la pagina
+  async ionViewWillEnter() {
+  console.log('ionViewWillEnter: Página CITA a punto de mostrarse');
+  // Recargar configuración cada vez que se inicia la página
+  this.permitirBorrarDesdeInicio = await this.configuracionService.getPermitirBorrarDesdeInicio();
+  console.log('Configuración recargada:', this.permitirBorrarDesdeInicio);
+}
 
   // Carga una cita aleatoria del servicio
   cargarCitaAleatoria() {
@@ -41,12 +46,11 @@ export class CitaPage implements OnInit {
   }
 
   //metodo para borrar la cita actual
-  borrarCitaActual() {
-    if (this.citaActual?.id !== undefined && this.permitirBorrarDesdeInicio) {
-      this.citaService.deleteCita(this.citaActual.id);
-      console.log('Cita borrada:', this.citaActual);
-      this.cargarCitaAleatoria();
-    }
+borrarCitaActual() {
+  if (this.citaActual?.id && this.permitirBorrarDesdeInicio) {
+    this.citaService.deleteCita(this.citaActual.id);
+    this.cargarCitaAleatoria();
   }
+}
 }
 
