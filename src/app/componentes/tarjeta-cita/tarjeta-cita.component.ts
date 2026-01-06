@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from "@ionic/angular/standalone";
+
+import { Component, Input } from '@angular/core';  // Importa Input
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { Cita } from '../../modelos/cita.model';
 
 @Component({
   selector: 'app-tarjeta-cita',
   templateUrl: './tarjeta-cita.component.html',
   styleUrls: ['./tarjeta-cita.component.scss'],
   standalone: true,
-  imports: [IonCardContent, IonCardTitle, IonCardHeader, IonCard],
+  imports: [CommonModule, IonicModule]
 })
-export class TarjetaCitaComponent  implements OnInit {
-cita: any;
-
-  constructor() { }
-
-  ngOnInit() {}
-
+export class TarjetaCitaComponent {
+  // @Input() con el mismo nombre que la propiedad que queremos recibir
+  @Input() cita: Cita | null = null;  // Propiedad para recibir la cita
 }

@@ -1,0 +1,30 @@
+<!--Primera pagina de la aplicacion para usar la tarjeta de citas-->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Citas Famosas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/gestionar">
+        <ion-icon name="list"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <h2 class="ion-text-center">Cita del Día</h2>
+  
+  <!--  TarjetaCitaComponent -->
+  <app-tarjeta-cita [cita]="citaActual"></app-tarjeta-cita>
+
+  <!-- IonicModule -->
+  <ion-button 
+    (click)="cargarCitaAleatoria()" 
+    expand="block" 
+    color="primary"
+    class="ion-margin-top">
+    <ion-icon name="refresh" slot="start"></ion-icon>
+    Nueva Cita Aleatoria
+  </ion-button>
+
+</ion-content>

@@ -7,12 +7,12 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'cita',
     pathMatch: 'full',
   },
   {
-    path: 'citas',
-    loadComponent: () => import('./paginas/citas/citas.page').then( m => m.CitasPage)
+    path: 'cita',
+    loadComponent: () => import('./paginas/cita/cita.page').then( m => m.CitaPage)
   },
   {
     path: 'gestion-de-citas',
