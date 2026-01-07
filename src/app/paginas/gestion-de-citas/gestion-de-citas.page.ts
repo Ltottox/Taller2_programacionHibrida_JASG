@@ -9,13 +9,18 @@ import { Cita } from '../../modelos/cita.model';
 import { addIcons } from 'ionicons';
 import { trash } from 'ionicons/icons';
 
-
 @Component({
   selector: 'app-gestion-de-citas',
   templateUrl: './gestion-de-citas.page.html',
   styleUrls: ['./gestion-de-citas.page.scss'],
   standalone: true,
-  imports: [CommonModule,FormsModule, IonicModule, FormularioCitaComponent,RouterModule ]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule,
+    FormularioCitaComponent
+  ]
 })
 export class GestionDeCitasPage implements OnInit {
   citas: Cita[] = [];
@@ -24,21 +29,21 @@ export class GestionDeCitasPage implements OnInit {
     addIcons({ trash });
   }
 
-  ngOnInit() {
-    this.cargarCitas();
+  async ngOnInit() {
+    await this.cargarCitas();
   }
 
-  cargarCitas() {
-    this.citas = this.citaService.getAllCitas();
+  async cargarCitas() {
+    this.citas = await this.citaService.getAllCitas();
   }
 
-  onCitaAgregada(cita: Cita) {
-    this.citaService.addCita(cita);
-    this.cargarCitas();
+  async onCitaAgregada(cita: Cita) {
+    await this.citaService.addCita(cita);
+    await this.cargarCitas();
   }
 
-  eliminarCita(id: number) {
-    console.log('Eliminando cita con ID:', id);
-    this.citaService.deleteCita(id);
-    this.cargarCitas(); // Recargar lista después de eliminar
+  async eliminarCita(id: number) {
+    await this.citaService.deleteCita(id);
+    await this.cargarCitas();
+  }
 }

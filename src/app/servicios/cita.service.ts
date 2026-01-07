@@ -1,32 +1,46 @@
 import { Injectable } from '@angular/core';
+import { DatabaseService } from './database.service';
 import { Cita } from '../modelos/cita.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CitaService {
+  private citas: Cita[] = [];
 
-  private _citas: Cita [] = [
-    { id: 1, frase: 'El único modo de hacer un gran trabajo es amar lo que haces', autor: 'Steve Jobs' },
-    { id: 2, frase: 'La innovación distingue al líder del seguidor', autor: 'Steve Jobs' },
-    { id: 3, frase: 'La vida es lo que te pasa mientras estás ocupado haciendo otros planes', autor: 'John Lennon' }
-  ];
-
-  getRandomCita(): Cita {
-    const randomIndex = Math.floor(Math.random() * this._citas.length);
-    return this._citas[randomIndex];
+  constructor(private databaseService: DatabaseService) {
+    // Inicialización al cargar la app
+    this.inicializarYBloqueante();
   }
 
-  getAllCitas(): Cita[] {
-    return [...this._citas];// Retorna una copia del array de citas, los 3 puntos son el operador spread, sirve para copiar los elementos de un array a otro.
+  // Ciclo de vida: Inicializar BD y cargar datos
+  private async inicializarYBloqueante(): Promise<void> {
+    await this.databaseService.initializeDatabase();
+    await this.cargarCitasDesdeBD();
   }
 
-  addCita(cita: Cita): void {
-    const newId = Math.max(...this._citas.map(q => q.id || 0)) + 1;
-    this._citas.push({ ...cita, id: newId });
+  async cargarCitasDesdeBD(): Promise<void> {
+    this.citas = await this.databaseService.getAllCitas();
   }
 
-  deleteCita(id: number): void {
-    this._citas = this._citas.filter(q => q.id !== id);
+  getRandomCita(): Cita | null {
+    if (this.citas.length === 0) return null;
+    const randomIndex = Math.floor(Math.random() * this.citas.length);
+    return this.citas[randomIndex];
+  }
+
+  async getAllCitas(): Promise<Cita[]> {
+    await this.cargarCitasDesdeBD();
+    return [...this.citas];
+  }
+
+  async addCita(cita: Cita): Promise<void> {
+    await this.databaseService.addCita(cita);
+    await this.cargarCitasDesdeBD();
+  }
+
+  async deleteCita(id: number): Promise<void> {
+    await this.databaseService.deleteCita(id);
+    await this.cargarCitasDesdeBD();
   }
 }

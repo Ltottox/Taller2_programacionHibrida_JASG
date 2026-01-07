@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">taller2phjasg</string>
+    <string name="title_activity_main">taller2phjasg</string>
+    <string name="package_name">ionic.taller2phjasg</string>
+    <string name="custom_url_scheme">ionic.taller2phjasg</string>
+</resources>
